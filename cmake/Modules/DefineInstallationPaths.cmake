@@ -117,7 +117,7 @@ endif()
 
 if(WIN32)
 	SET(PID_DIR
-	  "%APPDATA%/${APPLICATION_NAME}"
+	  "${EXEC_INSTALL_PREFIX}"
 	  CACHE PATH "The ${APPLICATION_NAME} pid dir"
 	  FORCE
 	)
