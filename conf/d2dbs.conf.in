@@ -61,7 +61,7 @@ charinfodir	=	"${LOCALSTATEDIR}/charinfo"
 ladderdir	=	"${LOCALSTATEDIR}/ladders"
 bak_charsavedir	=	"${LOCALSTATEDIR}/bak/charsave"
 bak_charinfodir	=	"${LOCALSTATEDIR}/bak/charinfo"
-#pidfile	=	"${LOCALSTATEDIR}/d2dbs.pid"
+#pidfile	=	"${PIDDIR}/d2dbs.pid"
 
 #										#
 #################################################################################

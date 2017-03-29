@@ -48,7 +48,7 @@ apt-get install liblua5.1-0-dev #Lua support
 apt-get install mysql-server mysql-client libmysqlclient-dev #MySQL support
 cd /home
 git clone https://github.com/pvpgn/pvpgn-server.git
-cmake -D CMAKE_INSTALL_PREFIX=/usr/local/pvpgn -D WITH_MYSQL=true -D WITH_LUA=true ../
+cmake -DCMAKE_INSTALL_PREFIX=/home/me/pvpgn -DCUSTOM_INSTALL_PATH=true -DWITH_MYSQL=true -DWITH_LUA=true ../
 make
 make install
 ```

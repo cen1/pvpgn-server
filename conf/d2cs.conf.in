@@ -110,7 +110,7 @@ bak_charinfodir		=	"${LOCALSTATEDIR}/bak/charinfo"
 ladderdir		=	"${LOCALSTATEDIR}/ladders"
 transfile		=	"${SYSCONFDIR}/address_translation.conf"
 d2gsconffile		=	"${SYSCONFDIR}/d2server.ini"
-#pidfile		=	"${LOCALSTATEDIR}/d2cs.pid"
+#pidfile		=	"${PIDDIR}/d2cs.pid"
 
 # d2s template for a new created characters
 newbiefile_amazon		=	"${LOCALSTATEDIR}/files/newbie.save"

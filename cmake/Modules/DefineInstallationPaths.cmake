@@ -5,7 +5,7 @@ ENDIF (NOT APPLICATION_NAME)
 
 SET(EXEC_INSTALL_PREFIX
   "${CMAKE_INSTALL_PREFIX}"
-  CACHE PATH  "Base directory for executables and libraries"
+  CACHE PATH  "Base directory for executables and libraries. /usr/local is default on Unix systems."
   FORCE
 )
 
@@ -36,18 +36,56 @@ if(WIN32)
     FORCE
   )
 else()
-  SET(LOCALSTATE_INSTALL_DIR
-    "${EXEC_INSTALL_PREFIX}/var/${APPLICATION_NAME}"
-    CACHE PATH "The ${APPLICATION_NAME} local state install dir (default prefix/var)"
+  if(CUSTOM_INSTALL_PATH)
+    SET(LOCALSTATE_INSTALL_DIR
+      "${EXEC_INSTALL_PREFIX}/var"
+      CACHE PATH "The ${APPLICATION_NAME} local state install dir (default prefix/lib)"
+      FORCE
+    )
+  else()
+    SET(LOCALSTATE_INSTALL_DIR
+      "/var/lib/${APPLICATION_NAME}"
+      CACHE PATH "The ${APPLICATION_NAME} local state install dir (default /var/lib)"
+      FORCE
+    )
+  endif()
+endif()
+
+if(WIN32)
+  SET(LOG_INSTALL_DIR
+    "${EXEC_INSTALL_PREFIX}/var"
+    CACHE PATH "The ${APPLICATION_NAME} log install dir (default prefix/var)"
+    FORCE
+  )
+else()
+  if(CUSTOM_INSTALL_PATH)
+    SET(LOG_INSTALL_DIR
+      "${EXEC_INSTALL_PREFIX}/var"
+      CACHE PATH "The ${APPLICATION_NAME} log install dir (default prefix/var)"
+      FORCE
+    )
+  else()
+    SET(LOG_INSTALL_DIR
+      "/var/log/${APPLICATION_NAME}"
+      CACHE PATH "The ${APPLICATION_NAME} log install dir (default /var/log)"
+      FORCE
+    )
+  endif()
+endif()
+
+if(WIN32)
+  SET(MAN_INSTALL_DIR
+    "${SHARE_INSTALL_PREFIX}/man"
+    CACHE PATH "The ${APPLICATION_NAME} man install dir (default prefix/man)"
+    FORCE
+  )
+else()
+  SET(MAN_INSTALL_DIR
+    "${SHARE_INSTALL_PREFIX}/man/man1"
+    CACHE PATH "The ${APPLICATION_NAME} man install dir (default prefix/share/man/man1)"
     FORCE
   )
 endif()
-
-SET(MAN_INSTALL_DIR
-  "${SHARE_INSTALL_PREFIX}/man"
-  CACHE PATH "The ${APPLICATION_NAME} man install dir (default prefix/man)"
-  FORCE
-)
 
 if(WIN32)
 	SET(SBIN_INSTALL_DIR
@@ -75,4 +113,26 @@ else()
     CACHE PATH "The ${APPLICATION_NAME} sysconfig install dir (default prefix/etc)"
     FORCE
   )
+endif()
+
+if(WIN32)
+	SET(PID_DIR
+	  "%APPDATA%/${APPLICATION_NAME}"
+	  CACHE PATH "The ${APPLICATION_NAME} pid dir"
+	  FORCE
+	)
+else()
+  if(CUSTOM_INSTALL_PATH)
+    SET(PID_DIR
+      "${EXEC_INSTALL_PREFIX}"
+      CACHE PATH "The ${APPLICATION_NAME} pid dir"
+      FORCE
+    )
+  else()
+    SET(PID_DIR
+      "/var/run"
+      CACHE PATH "The ${APPLICATION_NAME} pid dir"
+      FORCE
+    )
+  endif()
 endif()
