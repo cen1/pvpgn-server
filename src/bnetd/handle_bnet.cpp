@@ -4189,6 +4189,7 @@ namespace pvpgn
 			return 0;
 		}
 
+		// BNETDOCS: C>S 0x1C SID_STARTADVEX3
 		static int _client_startgame4(t_connection * c, t_packet const *const packet)
 		{
 			t_packet *rpacket;
@@ -4251,6 +4252,11 @@ namespace pvpgn
 				eventlog(eventlog_level_debug, __FUNCTION__, "[{}] got startgame4 status for game \"{}\" is 0x{:08x} (gametype=0x{:04x} option=0x{:04x}, flag=0x{:04x})", conn_get_socket(c), gamename, status, bngtype, option, flag);
 
 				if ((currgame = conn_get_game(c))) {
+
+					eventlog(eventlog_level_debug, __FUNCTION__, "[{}] Game \"{}\" setting mock addr", conn_get_socket(c), gamename);
+					game_mock_addr_and_port(currgame);
+					eventlog(eventlog_level_debug, __FUNCTION__, "[{}] Game \"{}\" mock addr SET", conn_get_socket(c), gamename);
+
 					if ((status & CLIENT_STARTGAME4_STATUSMASK_OPEN_VALID) == status) {
 						if (status & CLIENT_STARTGAME4_STATUS_START)
 							game_set_status(currgame, game_status_started);

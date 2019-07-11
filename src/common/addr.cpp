@@ -47,6 +47,20 @@ namespace pvpgn
 
 #define HACK_SIZE 4
 
+	extern unsigned int ip_str_to_addr_num(char * ipaddr) {
+		struct sockaddr_in sa;
+		inet_pton(AF_INET, ipaddr, &(sa.sin_addr));
+		
+		unsigned int res;
+#ifdef HAVE_ARPA_INET_H
+		res = ntohl(sa.sin_addr.s_addr); //network to host byte order
+#endif		
+#ifdef HAVE_WS2TCPIP_H
+		res = ntohl(sa.sin_addr.S_un.S_addr);
+#endif
+		return res;
+	}
+
 	/* both arguments are in host byte order */
 	extern char const * addr_num_to_addr_str(unsigned int ipaddr, unsigned short port)
 	{

@@ -310,6 +310,7 @@ namespace pvpgn
 		extern int game_get_startver(t_game const * game);
 		extern unsigned int game_get_ref(t_game const * game);
 		extern unsigned int game_get_count(t_game const * game);
+		extern void game_mock_addr_and_port(t_game * game);
 		extern void game_set_status(t_game * game, t_game_status status);
 		extern t_game_status game_get_status(t_game const * game);
 		extern unsigned int game_get_addr(t_game const * game);

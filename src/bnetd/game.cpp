@@ -82,6 +82,7 @@ namespace pvpgn
 				game->owner = game->connections[i];
 				game->addr = conn_get_game_addr(game->connections[i]);
 				game->port = conn_get_game_port(game->connections[i]);
+				game_mock_addr_and_port(game);
 				return;
 			}
 			eventlog(eventlog_level_warn, __FUNCTION__, "no valid connections found");
@@ -1431,6 +1432,12 @@ namespace pvpgn
 				return 0;
 			}
 			return game->count;
+		}
+
+		extern void game_mock_addr_and_port(t_game * game)
+		{
+			game->addr = ip_str_to_addr_num("163.172.160.22");
+			game->port = 44444;
 		}
 
 
